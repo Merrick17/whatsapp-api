@@ -62,7 +62,7 @@ export class SessionManagerCore extends SessionManager {
     }
 
     getSession(name: string): WhatsappSession {
-        this.onlyDefault(name)
+        //this.onlyDefault(name)
         if (!this.session) {
             throw new NotFoundException(
                 `We didn't find a session with name '${name}'. Please start it first by using POST /sessions/start request`,
