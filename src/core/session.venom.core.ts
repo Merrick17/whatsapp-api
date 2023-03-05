@@ -118,6 +118,7 @@ export class WhatsappSessionVenomCore extends WhatsappSession {
         } else if (this.status === WhatsappStatus.SCAN_QR_CODE) {
             return Promise.resolve(this.qr.get())
         } else if (this.status === WhatsappStatus.WORKING) {
+            
             return this.whatsapp.page.screenshot()
         } else {
             throw new UnprocessableEntityException(`Unknown status - ${this.status}`);

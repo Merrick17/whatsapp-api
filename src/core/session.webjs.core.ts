@@ -71,8 +71,13 @@ export class WhatsappSessionWebJSCore extends WhatsappSession {
     async getScreenshot(): Promise<Buffer | string> {
         if (this.status === WhatsappStatus.FAILED) {
             throw new UnprocessableEntityException(`The session under FAILED status. Please try to restart it.`);
+        } 
+        if(this.whatsapp.pupPage) {
+            return await this.whatsapp.pupPage.screenshot()
+        }else {
+            return 'The session under FAILED status. Please try to restart it.'
         }
-        return await this.whatsapp.pupPage.screenshot()
+        
     }
 
     async checkNumberStatus(request: CheckNumberStatusQuery): Promise<WANumberExistResult> {
