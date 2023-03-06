@@ -1,6 +1,5 @@
 import { Controller, Get, Query, Res } from '@nestjs/common';
 import { ApiSecurity, ApiTags } from '@nestjs/swagger';
-import { Readable } from 'stream';
 import { Response } from 'express';
 import { SessionManager } from '../core/abc/manager.abc';
 import { SessionQuery } from '../structures/base.dto';
@@ -28,7 +27,7 @@ export class ScreenshotController {
     const buffer = await whatsappService.getScreenshot();
     const base64Image = buffer.toString('base64');
     const imageSrc = `data:image/png;base64,${base64Image}`;
-
-    res.send({ image: imageSrc });
+    const html:string =`<src img=data:image/png;base64,${base64Image}"/>`
+    res.send({ image: html });
   }
 }
