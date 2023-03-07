@@ -1,5 +1,5 @@
 import {UnprocessableEntityException} from "@nestjs/common/exceptions/unprocessable-entity.exception";
-import {Buttons, Chat, Client, Contact, Events, GroupChat, Location, Message, MessageContent, MessageMedia} from "whatsapp-web.js";
+import {Buttons, Chat, Client, Contact, Events, GroupChat, Location, Message, MessageMedia} from "whatsapp-web.js";
 import {Message as MessageInstance} from "whatsapp-web.js/src/structures"
 import {WAEvents, WhatsappStatus} from "../structures/enums.dto";
 import {WhatsappSession} from "./abc/session.abc";
@@ -110,18 +110,9 @@ export class WhatsappSessionWebJSCore extends WhatsappSession {
     }
 
     sendImage(request: MessageImageRequest) {
-        //console.log("Requested",request)
-     
-        const mediaToSend :MessageMedia ={
-             /** MIME type of the attachment */
-        mimetype: request.file.mimetype,
-        //@ts-ignore
-        data: request.file.data ,
-        /** Document file name. Value can be null */
-        filename: request.file.filename
-        }
-        //console.log("File to send ",mediaToSend)
-        return this.whatsapp.sendMessage(this.ensureSuffix(request.chatId),mediaToSend,)
+        console.log("Requested",request)
+        const message = new MessageMedia(request.file.mimetype,request.file.data,request.file.filename)
+        return this.whatsapp.sendMessage(this.ensureSuffix(request.chatId), message)
     }
 
     sendFile(request: MessageFileRequest) {
