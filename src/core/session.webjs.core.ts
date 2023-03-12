@@ -142,6 +142,7 @@ export class WhatsappSessionWebJSCore extends WhatsappSession {
 
   sendImage(request: MessageImageRequest) {
     console.log('Requested', request);
+   
     const message = new MessageMedia(
       request.file.mimetype,
       request.file.data,
@@ -150,6 +151,7 @@ export class WhatsappSessionWebJSCore extends WhatsappSession {
     return this.whatsapp.sendMessage(
       this.ensureSuffix(request.chatId),
       message,
+      {caption: request.caption}
     );
   }
 
