@@ -120,6 +120,7 @@ class FileRequest extends ChatRequest {
         ],
     })
     file: BinaryFile | RemoteFile
+    url:string
 }
 
 export class MessageImageRequest extends FileRequest {
