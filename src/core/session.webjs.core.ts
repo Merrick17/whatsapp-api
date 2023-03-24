@@ -142,13 +142,16 @@ export class WhatsappSessionWebJSCore extends WhatsappSession {
 
   async sendImage(request: MessageImageRequest) {
     //console.log('Requested', request);
-   
-    const message = await MessageMedia.fromUrl(request.url)
-    return this.whatsapp.sendMessage(
-      this.ensureSuffix(request.chatId),
-      message,
-      {caption: request.caption}
-    );
+    if(MessageMedia)
+    {
+      const message = await MessageMedia.fromUrl(request.url)
+      return this.whatsapp.sendMessage(
+        this.ensureSuffix(request.chatId),
+        message,
+        {caption: request.caption}
+      );
+    }
+    
   }
 
   sendFile(request: MessageFileRequest) {
